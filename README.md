@@ -21,3 +21,25 @@
 - `.github/instructions/tests.instructions.md` — отдельные правила для тестов.
 - `.github/workflows/copilot-setup-steps.yml` — подготовка окружения для coding agent.
 - `AGENTS.md` — роли, ограничения и ожидания от Copilot coding agent в этом репозитории.
+
+iiko-order-pricing-demo/
+├─ README.md
+├─ AGENTS.md
+├─ src/
+│  └─ IikoOrderPricing/
+│     ├─ IikoOrderPricing.csproj
+│     ├─ Models/
+│     │  ├─ Order.cs
+│     │  └─ OrderItem.cs
+│     └─ Services/
+│        └─ OrderPricingService.cs
+├─ tests/
+│  └─ IikoOrderPricing.Tests/
+│     ├─ IikoOrderPricing.Tests.csproj
+│     └─ OrderPricingServiceTests.cs
+└─ .github/
+   ├─ copilot-instructions.md
+   ├─ instructions/
+   │  └─ tests.instructions.md
+   └─ workflows/
+      └─ copilot-setup-steps.yml
