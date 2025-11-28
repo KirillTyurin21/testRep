@@ -1,45 +1,54 @@
-# Copilot Instructions for testRep
+# Copilot instructions for iiko-order-pricing-demo
 
-## Project Overview
-**testRep** is a minimal testing repository for JSON data management. Current structure contains configuration data in JSON format.
+This repository contains a small C#/.NET 8 library that models restaurant orders
+and calculates totals with per-item discounts and a service charge.
 
-## Key Files & Structure
+## Build and test
 
-- `iikoJsonGroup.json` - JSON configuration file containing menu/inventory data (currently: `{"meat": 100}`)
-- `fileTest/` - Empty testing directory for future test files
-- `README.md` - Project documentation
+- The project uses .NET 8 and the `dotnet` CLI.
+- To restore dependencies, run:
 
-## Data Format Conventions
+  - `dotnet restore src/IikoOrderPricing/IikoOrderPricing.csproj`
+  - `dotnet restore tests/IikoOrderPricing.Tests/IikoOrderPricing.Tests.csproj`
 
-When working with JSON files in this repo:
-- Use UTF-8 encoding without BOM
-- Follow standard JSON formatting: 2-space indentation
-- Object keys use lowercase with underscores (e.g., `meat`, `group_name`)
-- Numeric values represent quantities or identifiers
+- To build the code, run:
 
-Example from `iikoJsonGroup.json`:
-```json
-{
-    "meat": 100
-}
-```
+  - `dotnet build src/IikoOrderPricing/IikoOrderPricing.csproj -c Release`
+  - `dotnet build tests/IikoOrderPricing.Tests/IikoOrderPricing.Tests.csproj -c Release`
 
-## Development Patterns
+- To run tests, run:
 
-### JSON Modifications
-- Always maintain valid JSON syntax when updating data files
-- Validate against iiko (POS system) schema if extending data structure
-- Test changes in `fileTest/` directory before applying to production data
+  - `dotnet test tests/IikoOrderPricing.Tests/IikoOrderPricing.Tests.csproj -c Release`
 
-### Testing Approach
-- Place test files and fixtures in the `fileTest/` directory
-- Use descriptive filenames for test data (e.g., `iikoJsonGroup.test.json`)
+When you propose changes, ensure that:
+- The solution builds successfully.
+- All tests pass and new logic is covered by tests.
 
-## Build & Validation
-- No build system currently configured
-- Use JSON validators to check data integrity (e.g., VS Code's built-in JSON validation)
+## Repository structure
 
-## Next Steps for Expansion
-- Define complete JSON schema for iiko data integration
-- Add test files demonstrating valid data structures
-- Document any external API integrations or dependencies
+- `src/IikoOrderPricing` — domain models and services.
+  - `Models/Order.cs` and `Models/OrderItem.cs` — basic restaurant order model.
+  - `Services/OrderPricingService.cs` — pricing logic.
+- `tests/IikoOrderPricing.Tests` — xUnit tests that validate pricing behavior.
+
+## Coding standards
+
+- Use explicit, descriptive names for methods and variables.
+- Prefer pure functions and deterministic logic for pricing calculations.
+- Avoid magic numbers. If you need constants, declare them clearly.
+- Keep public APIs small and focused.
+- When fixing a bug, always add or update at least one regression test.
+
+## Testing guidelines
+
+- New business logic in `OrderPricingService` must be covered by unit tests.
+- Do not weaken existing assertions when fixing behavior.
+- If you change the pricing rules, update tests to reflect the new expected behavior
+  and explain the reasoning in the pull request description.
+
+## Documentation and pull requests
+
+- In pull request descriptions, briefly explain:
+  - Which scenario in the restaurant domain you are changing (for example, how service charge is applied).
+  - How you tested your changes (commands, test names).
+- Keep pull requests focused on a single cohesive change.
