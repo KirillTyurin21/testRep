@@ -37,11 +37,13 @@ When you propose changes, ensure that:
 - Prefer pure functions and deterministic logic for pricing calculations.
 - Avoid magic numbers. If you need constants, declare them clearly.
 - Keep public APIs small and focused.
+- Use a single, consistent logging mechanism throughout the project. Do not introduce multiple logging frameworks or ad-hoc logging approaches.
 - When fixing a bug, always add or update at least one regression test.
 
 ## Testing guidelines
 
 - New business logic in `OrderPricingService` must be covered by unit tests.
+- Any bug fix in `OrderPricingService` must be accompanied by at least one regression test that verifies the fix.
 - Do not weaken existing assertions when fixing behavior.
 - If you change the pricing rules, update tests to reflect the new expected behavior
   and explain the reasoning in the pull request description.
